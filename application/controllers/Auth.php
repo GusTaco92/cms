@@ -111,9 +111,7 @@ class Auth extends Admin_Controller
 				// false case
 				$this->data['login_button']=$google_client->createAuthUrl();
 				$this->load->view('login', $this->data);
-			}	
-
-
+			}
 
 
 		}
