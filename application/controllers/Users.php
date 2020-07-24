@@ -44,12 +44,13 @@ class Users extends Admin_Controller
 			redirect('dashboard', 'refresh');
 		}
 
-		$this->form_validation->set_rules('groups', 'Group', 'required');
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]|is_unique[users.username]');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[users.email]');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
-		$this->form_validation->set_rules('cpassword', 'Confirm password', 'trim|required|matches[password]');
-		$this->form_validation->set_rules('fname', 'First name', 'trim|required');
+		$this->form_validation->set_rules('groups', 'Grupo', 'required');
+		$this->form_validation->set_rules('username', 'Usuario', 'trim|required|min_length[5]|max_length[12]|is_unique[users.username]');
+		$this->form_validation->set_rules('email', 'Correo', 'trim|required|is_unique[users.email]');
+		$this->form_validation->set_rules('password', 'Contraseña', 'trim|required|min_length[8]');
+		$this->form_validation->set_rules('cpassword', 'Confirmar contraseña', 'trim|required|matches[password]');
+		$this->form_validation->set_rules('fname', 'Nombre', 'trim|required');
+		$this->form_validation->set_rules('age', 'Fecha de nacimiento', 'trim|required');
 
         if ($this->form_validation->run() == TRUE) {
             // true case
@@ -61,7 +62,8 @@ class Users extends Admin_Controller
         		'firstname' => $this->input->post('fname'),
         		'lastname' => $this->input->post('lname'),
         		'phone' => $this->input->post('phone'),
-        		'gender' => $this->input->post('gender'),
+				'gender' => $this->input->post('gender'),
+				'birthday' => $this->input->post('age'),
         	);
 
         	$create = $this->model_users->create($data, $this->input->post('groups'));

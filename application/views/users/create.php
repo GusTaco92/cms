@@ -82,6 +82,11 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="age">Fecha de nacimiento</label>
+                  <input type="date" class="form-control" id="age" name="age" placeholder="Fecha de nacimiento" autocomplete="off">
+                </div>
+
+                <div class="form-group">
                   <label for="phone">Teléfono</label>
                   <input type="text" class="form-control" id="phone" name="phone" placeholder="Teléfono" autocomplete="off">
                 </div>
