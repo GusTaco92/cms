@@ -12,6 +12,27 @@
         </li>
 
         <?php if($user_permission): ?>
+          <?php if(in_array('createPrivada', $user_permission) || in_array('updatePrivada', $user_permission) || in_array('viewPrivada', $user_permission) || in_array('deletePrivada', $user_permission)): ?>
+            <li class="treeview" id="mainPrivadaNav">
+            <a href="#">
+              <i class="far fa-building"></i>
+              <span>*Privada</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <?php if(in_array('createPrivada', $user_permission)): ?>
+              <li id="createPrivadaNav"><a href="<?php echo base_url('Privada/create') ?>"><i class="fa fa-circle-o"></i> Registrar orden</a></li>
+              <?php endif; ?>
+
+              <?php if(in_array('updatePrivada', $user_permission) || in_array('viewPrivada', $user_permission) || in_array('deletePrivada', $user_permission)): ?>
+              <li id="managePrivadaNav"><a href="<?php echo base_url('Privada') ?>"><i class="fa fa-circle-o"></i> Administrar Privada</a></li>
+            <?php endif; ?>
+            </ul>
+          </li>
+          <?php endif; ?>
+
           <?php if(in_array('createInforme', $user_permission) || in_array('updateInforme', $user_permission) || in_array('viewInforme', $user_permission) || in_array('deleteInforme', $user_permission)): ?>
             <li class="treeview" id="mainInformeNav">
             <a href="#">
@@ -31,7 +52,8 @@
             <?php endif; ?>
             </ul>
           </li>
-          <?php endif; ?>
+          <?php endif; ?>     
+
           <?php if(in_array('createGatiland', $user_permission) || in_array('updateGatiland', $user_permission) || in_array('viewGatiland', $user_permission) || in_array('deleteGatiland', $user_permission)): ?>
             <li class="treeview" id="mainGatilandNav">
             <a href="#">

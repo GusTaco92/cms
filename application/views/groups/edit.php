@@ -63,6 +63,27 @@
                     </thead>
                     <tbody>
                       <tr>
+                        <td>Admin Privada</td>
+                        <td><input type="checkbox" class="minimal" name="permission[]" id="permission" class="minimal" value="createPrivada" <?php if($serialize_permission) {
+                          if(in_array('createPrivada', $serialize_permission)) { echo "checked"; } 
+                        } ?> ></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" class="minimal" value="updatePrivada" <?php 
+                        if($serialize_permission) {
+                          if(in_array('updatePrivada', $serialize_permission)) { echo "checked"; } 
+                        }
+                        ?>></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" class="minimal" value="viewPrivada" <?php 
+                        if($serialize_permission) {
+                          if(in_array('viewPrivada', $serialize_permission)) { echo "checked"; }   
+                        }
+                        ?>></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" class="minimal" value="deletePrivada" <?php 
+                        if($serialize_permission) {
+                          if(in_array('deletePrivada', $serialize_permission)) { echo "checked"; }  
+                        }
+                         ?>></td>
+                      </tr>
+                      <tr>
                         <td>Informes costos</td>
                         <td><input type="checkbox" class="minimal" name="permission[]" id="permission" class="minimal" value="createInforme" <?php if($serialize_permission) {
                           if(in_array('createInforme', $serialize_permission)) { echo "checked"; } 

@@ -60,6 +60,13 @@
                     </thead>
                     <tbody>
                       <tr>
+                        <td>Admin Privada</td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="createPrivada" class="minimal"></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="updatePrivada" class="minimal"></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="viewPrivada" class="minimal"></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="deletePrivada" class="minimal"></td>
+                      </tr>
+                      <tr>
                         <td>Informes costos</td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="createInforme" class="minimal"></td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="updateInforme" class="minimal"></td>
