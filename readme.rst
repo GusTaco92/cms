@@ -1,11 +1,7 @@
 ######################
-Super Admin Crednetial
+CMS
 ######################
-email: admin@admin.com
-password: password
-
-database name: stock
-
+email: gustavo_gow1992@hotmail.com
 
 ###################
 What is CodeIgniter
