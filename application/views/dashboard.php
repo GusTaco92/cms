@@ -6,7 +6,6 @@
     <section class="content-header">
       <h1>
         Dashboard
-        <?php echo $this->session->userdata('id'); ?>
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">

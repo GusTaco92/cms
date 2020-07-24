@@ -22,7 +22,8 @@ class Auth extends Admin_Controller
 		$google_client = new Google_Client();
 		$google_client->setClientId('338345927919-chd4jrcr1g2ajb0kc63ri434pm90k960.apps.googleusercontent.com'); //Define your ClientID
 		$google_client->setClientSecret('g6uSO_WbSLMgpNGuTtOCYgdC'); //Define your Client Secret Key
-		$google_client->setRedirectUri('http://localhost/auth/login'); //Define your Redirect Uri
+		// $google_client->setRedirectUri('http://localhost/auth/login'); //Define your Redirect Uri
+		$google_client->setRedirectUri('http://cms.colegiomexicodelsureste.edu.mx/auth/login'); //Define your Redirect Uri
 		$google_client->addScope('email');
 		$google_client->addScope('profile');
 		$google_client->addScope(Google_Service_Analytics::ANALYTICS_READONLY);
