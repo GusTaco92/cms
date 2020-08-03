@@ -12,7 +12,7 @@ class Privada extends Admin_Controller
 
 		$this->data['page_title'] = 'Privada';
 
-		// $this->load->model('model_orders');
+		$this->load->model('model_privada');
     }
 
     public function Index()
@@ -20,7 +20,12 @@ class Privada extends Admin_Controller
         if(!in_array('viewPrivada', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
-
+		$privada_data = $this->model_privada->getOrdenesData();
+		$result = array();
+		foreach ($privada_data as $k => $v) {
+			$result[$k]['ordenes_info'] = $v;
+		}
+		$this->data['privada_data'] = $result;
 		$this->render_template('privada/index', $this->data);
     }
 
@@ -30,6 +35,10 @@ class Privada extends Admin_Controller
             redirect('dashboard', 'refresh');
         }
 
+		if (empty($_FILES['product_image']['name']))
+		{
+			$this->form_validation->set_rules('product_image', 'Imagenes', 'required');
+		}
 		$this->form_validation->set_rules('tipoV', 'Tipo de vivienda', 'required');
 		$this->form_validation->set_rules('edif', 'Edificio', 'trim|required');
 		$this->form_validation->set_rules('mat', 'Materiales', 'trim|required');
@@ -41,7 +50,7 @@ class Privada extends Admin_Controller
 	
         if ($this->form_validation->run() == TRUE) {
             // true case
-        	$upload_image = $this->upload_image();
+        	$upload_image = $this->upload_image($_FILES['product_image']);
 
         	$data = array(
         		'Casa/Dto' => $this->input->post('tipoV'),
@@ -49,41 +58,58 @@ class Privada extends Admin_Controller
         		'Materiales' => $this->input->post('mat'),
         		'Factura' => $this->input->post('fact'),
                 'Cotización' => $this->input->post('cot'),
-                'Fecha de inicio' => $this->input->post('f_ini'),
-                'Fecha de termino' => $this->input->post('f_fin'),                
+                'Fecha_de_inicio' => $this->input->post('f_ini'),
+                'Fecha_de_termino' => $this->input->post('f_fin'),                
         	);
-
-        	$create = $this->model_products->create($data);
+			
+        	$create = $this->model_privada->create($data,$upload_image);
         	if($create == true) {
-        		$this->session->set_flashdata('success', 'Successfully created');
-        		redirect('products/', 'refresh');
+        		$this->session->set_flashdata('success', 'Orden creada correctamente');
+        		redirect('privada/', 'refresh');
         	}
         	else {
-        		$this->session->set_flashdata('errors', 'Error occurred!!');
-        		redirect('products/create', 'refresh');
+        		$this->session->set_flashdata('errors', 'Corrió un error, contacta al administrador del sistema!!');
+        		redirect('privada/create', 'refresh');
         	}
         }
         else {
-            // false case
-
-        	// attributes 
-        	$attribute_data = $this->model_attributes->getActiveAttributeData();
-
-        	$attributes_final_data = array();
-        	foreach ($attribute_data as $k => $v) {
-        		$attributes_final_data[$k]['attribute_data'] = $v;
-
-        		$value = $this->model_attributes->getAttributeValueData($v['id']);
-
-        		$attributes_final_data[$k]['attribute_value'] = $value;
+        	// ordenes
+        	$ordenes_data = $this->model_privada->getOrdenesData();
+        	$ordenes_finalData = array();
+        	foreach ($ordenes_data as $k => $v) {
+        		$ordenes_finalData[$k]['ordenes_data'] = $v;
         	}
-
-        	$this->data['attributes'] = $attributes_final_data;
-			$this->data['brands'] = $this->model_brands->getActiveBrands();        	
-			$this->data['category'] = $this->model_category->getActiveCategroy();        	
-			$this->data['stores'] = $this->model_stores->getActiveStore();        	
-
-            $this->render_template('products/create', $this->data);
+        	$this->data['ordenes'] = $ordenes_finalData;    	
+            $this->render_template('privada/create', $this->data);
         }	
+	}
+	
+	private function upload_image($files)
+	{
+		$config = array(
+			'upload_path'   => 'assets/images/evidencias',
+			'allowed_types' => 'jpg|gif|png',
+			'file_name'     => uniqid(),                
+			'max_size'     => '1000',                
+		);
+
+		$this->load->library('upload', $config);
+
+		foreach ($files['name'] as $key => $image) {
+			$_FILES['product_image[]']['name']= $files['name'][$key];
+			$_FILES['product_image[]']['type']= $files['type'][$key];
+			$_FILES['product_image[]']['tmp_name']= $files['tmp_name'][$key];
+			$_FILES['product_image[]']['error']= $files['error'][$key];
+			$_FILES['product_image[]']['size']= $files['size'][$key];
+			$type = explode('.', $files['name'][$key]);
+			$type = $type[count($type) - 1];
+			$datos[]=array(
+				'ruta' => $config['upload_path'].'/'.$config['file_name'].'.'.$type,
+			);
+			
+			$this->upload->initialize($config);
+			$this->upload->do_upload('product_image[]');
+		}
+		return $datos;
 	}
 }

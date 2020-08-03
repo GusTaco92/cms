@@ -50,55 +50,48 @@
                   <label for="product_image">Imagen</label>
                   <div class="kv-avatar">
                       <div class="file-loading">
-                          <input id="product_image" name="product_image" type="file"  multiple>
+                          <input id="product_image" name="product_image[]" type="file"  multiple required>
                       </div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                    <select class="custom-select" name="tipoV">
-                        <option selected>Tipo</option>
-                        <option value="Casa">Casa</option>
-                        <option value="Departamento">Departamento</option>
-                    </select>
+                  <label for="tipoV">Tipo de edificio</label>
+                  <select class="form-control" id="tipoV" name="tipoV" required>
+                    <option value="">Seleccionar grupos</option>
+                      <option value="Casa">Casa</option>
+                      <option value="Departamento">Departamento</option>
+                  </select>
                 </div>
 
                 <div class="form-group">
                   <label for="edif">Edificio</label>
-                  <input type="text" class="form-control" id="edif" name="edif" placeholder="Enter edif" autocomplete="off" />
+                  <input type="text" class="form-control" id="edif" name="edif" placeholder="# de edificio" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
                   <label for="mat">Materiales</label>
-                  <input type="text" class="form-control" id="mat" name="mat" placeholder="Enter matmat" autocomplete="off" />
+                  <input type="text" class="form-control" id="mat" name="mat" placeholder="Ingresa los materiales" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
                   <label for="fact">Factura</label>
-                  <textarea type="text" class="form-control" id="fact" name="fact" placeholder="Enter 
-                  fact" autocomplete="off">
-                  </textarea>
+                  <textarea type="text" class="form-control" id="fact" name="fact" placeholder="Ingresa el folio de la factura" autocomplete="off"></textarea>
                 </div>
 
                 <div class="form-group">
                   <label for="cot">Cotización</label>
-                  <textarea type="text" class="form-control" id="cot" name="cot" placeholder="Enter 
-                  fact" autocomplete="off">
-                  </textarea>
+                  <textarea type="text" class="form-control" id="cot" name="cot" placeholder="Ingresa el folio de la cotización" autocomplete="off"></textarea>
                 </div>
 
                 <div class="form-group">
                   <label for="f_ini">Fecha de inicio</label>
-                  <textarea type="text" class="form-control" id="f_ini" name="f_ini" placeholder="Enter 
-                  fact" autocomplete="off">
-                  </textarea>
+                  <input type="date" class="form-control" id="f_ini" name="f_ini">
                 </div>
 
                 <div class="form-group">
                   <label for="f_fin">Fecha de fin</label>
-                  <textarea type="text" class="form-control" id="f_fin" name="f_fin" placeholder="Enter 
-                  fact" autocomplete="off">
-                  </textarea>
+                  <input type="date" class="form-control" id="f_fin" name="f_fin">
                 </div>
 
               </div>
@@ -128,8 +121,8 @@
     $(".select_group").select2();
     $("#description").wysihtml5();
 
-    $("#mainProductNav").addClass('active');
-    $("#addProductNav").addClass('active');
+    $("#mainGatilandNav").addClass('active');
+    $("#manageGatilandNav").addClass('active');
     
     var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + 
         'onclick="alert(\'Call your custom code here.\')">' +

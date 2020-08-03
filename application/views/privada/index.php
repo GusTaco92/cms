@@ -55,7 +55,7 @@
                     <th>Cotización</th>
                     <th>Fecha de inicio</th>
                     <th>Fecha de termino</th>
-                  
+                    <th>Evidencias</th>
 
                   <?php if(in_array('updatePrivada', $user_permission) || in_array('deletePrivada', $user_permission)): ?>
                   <th>Acción</th>
@@ -63,26 +63,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <?php if($gatiland_data): ?>                  
-                    <?php foreach ($gatiland_data as $k => $v): ?>
+                  <?php if($privada_data): ?>                  
+                    <?php foreach ($privada_data as $k => $v): ?>
                       <tr>
-                        <td><?php echo $v['user_info']['Gat_id']; ?></td>
-                        <td><?php echo $v['user_info']['Gat_nombre']; ?></td>
-                        <td><?php echo $v['user_info']['Gat_facebook']; ?></td>
-                        <td><?php echo $v['user_info']['Gat_tel']; ?></td>
-                        <td><?php echo $v['user_info']['Gat_email']; ?></td>
-                        <td><?php echo $v['user_info']['Gat_aportación']; ?></td>
-                        <td><?php echo $v['user_info']['Gat_sugerencia']; ?></td>
-                        <td><?php echo $v['user_info']['Gat_comentario']; ?></td>
-                        <td><?php echo $v['user_info']['Gat_fechaRegistro']; ?></td>
-                        <td><?php echo $v['user_info']['Gat_sitioW']; ?></td>
+                        <td><?php echo $v['ordenes_info']['id']; ?></td>
+                        <td><?php echo $v['ordenes_info']['Casa/Dto']; ?></td>
+                        <td><?php echo $v['ordenes_info']['Edificio']; ?></td>
+                        <td><?php echo $v['ordenes_info']['Materiales']; ?></td>
+                        <td><?php echo $v['ordenes_info']['Factura']; ?></td>
+                        <td><?php echo $v['ordenes_info']['Cotización']; ?></td>
+                        <td><?php echo $v['ordenes_info']['Fecha_de_inicio']; ?></td>
+                        <td><?php echo $v['ordenes_info']['Fecha_de_termino']; ?></td>
+                        <td>Evidencias en progreso.........</td>
                         <?php if(in_array('updatePrivada', $user_permission) || in_array('deletePrivada', $user_permission)): ?>
                         <td>
                           <?php if(in_array('updatePrivada', $user_permission)): ?>
-                            <a href="<?php echo base_url('Privada/edit/'.$v['user_info']['Gat_id']) ?>" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                            <a href="<?php echo base_url('Privada/edit/'.$v['ordenes_info']['id']) ?>" class="btn btn-default"><i class="fa fa-edit"></i></a>
                           <?php endif; ?>
                           <?php if(in_array('deletePrivada', $user_permission)): ?>
-                            <a href="<?php echo base_url('Privada/delete/'.$v['user_info']['Gat_id']) ?>" class="btn btn-default"><i class="fa fa-trash"></i></a>
+                            <a href="<?php echo base_url('Privada/delete/'.$v['ordenes_info']['id']) ?>" class="btn btn-default"><i class="fa fa-trash"></i></a>
                           <?php endif; ?>
                         </td>
                       <?php endif; ?>

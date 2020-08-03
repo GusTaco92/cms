@@ -198,8 +198,8 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $("#mainGroupNav").addClass('active');
-    $("#addGroupNav").addClass('active');
+    $("#mainPrivadaNav").addClass('active');
+    $("#createPrivadaNav").addClass('active');
 
     $('input[type="checkbox"].minimal').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
