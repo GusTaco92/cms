@@ -138,4 +138,10 @@ class Privada extends Admin_Controller
 			}	
 		}
 	}
+
+	public function detail($id)
+	{
+		$this->data['pictures']=$this->model_privada->img($id);
+		$this->render_template('privada/detail', $this->data);
+	}
 }

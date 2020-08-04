@@ -45,4 +45,10 @@ class Model_privada extends CI_Model
         return $this->db->trans_complete();
     }
 
+    public function img($id)
+	{
+		$sql = "SELECT * FROM Privada_OrdenesEvidencia WHERE id_ordenes = ?";
+		$query = $this->db->query($sql,array($id));
+		return $query->result_array();
+	}
 }

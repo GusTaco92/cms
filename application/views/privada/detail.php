@@ -47,47 +47,14 @@
               <table id="userTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Casa/Dto</th>
-                    <th>Edificio</th>
-                    <th>Materiales</th>
-                    <th>Factura</th>
-                    <th>Cotización</th>
-                    <th>Fecha de inicio</th>
-                    <th>Fecha de termino</th>
-                    <th>Evidencias</th>
-
-                  <?php if(in_array('updatePrivada', $user_permission) || in_array('deletePrivada', $user_permission)): ?>
-                  <th>Acción</th>
-                  <?php endif; ?>
+                    <th>Imagen</th>
                 </tr>
                 </thead>
                 <tbody>
-                  <?php if($privada_data): ?>                  
-                    <?php foreach ($privada_data as $k => $v): ?>
+                  <?php if($pictures): ?>                  
+                    <?php foreach ($pictures as $k => $v): ?>
                       <tr>
-                        <td><?php echo $v['ordenes_info']['id']; ?></td>
-                        <td><?php echo $v['ordenes_info']['Casa/Dto']; ?></td>
-                        <td><?php echo $v['ordenes_info']['Edificio']; ?></td>
-                        <td><?php echo $v['ordenes_info']['Materiales']; ?></td>
-                        <td><?php echo $v['ordenes_info']['Factura']; ?></td>
-                        <td><?php echo $v['ordenes_info']['Cotización']; ?></td>
-                        <td><?php echo $v['ordenes_info']['Fecha_de_inicio']; ?></td>
-                        <td><?php echo $v['ordenes_info']['Fecha_de_termino']; ?></td>
-                        <td>
-                          <a href="<?php echo base_url('Privada/detail/'.$v['ordenes_info']['id']) ?>"><i class="fas fa-eye"></i></a>
-                        </td>
-                        <?php if(in_array('updatePrivada', $user_permission) || in_array('deletePrivada', $user_permission)): ?>
-                        <td>
-                          <?php if(in_array('updatePrivada', $user_permission)): ?>
-                            <a href="<?php echo base_url('Privada/edit/'.$v['ordenes_info']['id']) ?>" class="btn btn-default"><i class="fa fa-edit"></i></a>
-                          <?php endif; ?>
-                          <?php if(in_array('deletePrivada', $user_permission)): ?>
-                            <a href="<?php echo base_url('Privada/delete/'.$v['ordenes_info']['id']) ?>" class="btn btn-default"><i class="fa fa-trash"></i></a>
-                          <?php endif; ?>
-                        </td>
-                      <?php endif; ?>
-                      </tr>
+                        <td><img src="<?php echo base_url() . $v['URL'] ?>" width="" height="" class="img-circle"></td>
                     <?php endforeach ?>
                   <?php endif; ?>
                 </tbody>
