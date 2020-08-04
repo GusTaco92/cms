@@ -121,8 +121,8 @@
     $(".select_group").select2();
     $("#description").wysihtml5();
 
-    $("#mainGatilandNav").addClass('active');
-    $("#manageGatilandNav").addClass('active');
+    $("#mainPrivadaNav").addClass('active');
+    $("#createPrivadaNav").addClass('active');
     
     var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + 
         'onclick="alert(\'Call your custom code here.\')">' +

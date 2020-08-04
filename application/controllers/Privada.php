@@ -112,4 +112,30 @@ class Privada extends Admin_Controller
 		}
 		return $datos;
 	}
+
+	public function delete($id)
+	{
+		if(!in_array('deletePrivada', $this->permission)) {
+			redirect('dashboard', 'refresh');
+		}
+
+		if($id) {
+			if($this->input->post('confirm')) {
+					$delete = $this->model_privada->delete($id);
+					if($delete == true) {
+		        		$this->session->set_flashdata('success', 'Eliminado satisfactoriamente');
+		        		redirect('privada/', 'refresh');
+		        	}
+		        	else {
+		        		$this->session->set_flashdata('error', 'Ocurrió un error!!');
+		        		redirect('privada/delete/'.$id, 'refresh');
+		        	}
+
+			}	
+			else {
+				$this->data['id'] = $id;
+				$this->render_template('privada/delete', $this->data);
+			}	
+		}
+	}
 }

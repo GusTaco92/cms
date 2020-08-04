@@ -34,4 +34,15 @@ class Model_privada extends CI_Model
         return $this->db->trans_complete();
     }
 
+    public function delete($id)
+    {
+        $this->db->trans_start();
+        $this->db->where('id', $id);
+		$delete = $this->db->delete('Privada_Ordenes');
+        $this->db->where('id_ordenes', $id);
+		$delete = $this->db->delete('Privada_OrdenesEvidencia');
+        // return ($delete == true) ? true : false;
+        return $this->db->trans_complete();
+    }
+
 }

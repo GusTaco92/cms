@@ -109,7 +109,7 @@
     $(document).ready(function() {
       $('#userTable').DataTable();
 
-      $("#mainGatilandNav").addClass('active');
-      $("#manageGatilandNav").addClass('active');
+      $("#mainPrivadaNav").addClass('active');
+      $("#managePrivadaNav").addClass('active');
     });
   </script>
