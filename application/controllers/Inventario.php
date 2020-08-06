@@ -1,37 +1,37 @@
-<?php
+<?php 
 
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Privada extends Admin_Controller 
+class Inventario extends Admin_Controller 
 {
 	public function __construct()
 	{
 		parent::__construct();
 
 		$this->not_logged_in();
+		
+		$this->data['page_title'] = 'Inventario';
+		$this->load->model('model_inventario');
+	}
 
-		$this->data['page_title'] = 'Privada';
-
-		$this->load->model('model_privada');
-    }
-
-    public function Index()
-    {
-        if(!in_array('viewPrivada', $this->permission)) {
-            redirect('dashboard', 'refresh');
-        }
-		$privada_data = $this->model_privada->getOrdenesData();
-		$result = array();
-		foreach ($privada_data as $k => $v) {
-			$result[$k]['ordenes_info'] = $v;
-		}
-		$this->data['privada_data'] = $result;
-		$this->render_template('privada/index', $this->data);
-    }
-
-    public function create()
+	
+	public function index()
 	{
-		if(!in_array('createPrivada', $this->permission)) {
+		if(!in_array('viewInforme', $this->permission)) {
+			redirect('dashboard', 'refresh');
+		}
+
+		$informe_data = $this->model_informes->getDataInformesActivos();
+
+		$result = array();
+		foreach ($informe_data as $k => $v) {
+			$result[$k]['user_info'] = $v;
+		}
+		$this->data['informe_data'] = $result;
+		$this->render_template('informes/index', $this->data);
+    }
+    
+    public function create()
+    {
+        if(!in_array('createInventario', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
 
@@ -74,79 +74,42 @@ class Privada extends Admin_Controller
         }
         else {
         	// ordenes
-        	$ordenes_data = $this->model_privada->getOrdenesData();
-        	$ordenes_finalData = array();
+        	$ordenes_data = $this->model_inventario->getData();
+        	$depto_data = $this->model_inventario->getDepto();
+        	$inventario_finalData = array();
         	foreach ($ordenes_data as $k => $v) {
-        		$ordenes_finalData[$k]['ordenes_data'] = $v;
+        		$inventario_finalData[$k]['inventario_data'] = $v;
         	}
-        	$this->data['ordenes'] = $ordenes_finalData;    	
-            $this->render_template('privada/create', $this->data);
-        }	
-	}
-	
-	private function upload_image($files)
-	{
-		$config = array(
-			'upload_path'   => 'assets/images/evidencias',
-			'allowed_types' => 'jpg|gif|png',
-			'file_name'     => uniqid(),                
-			'max_size'     => '1000',                
-		);
+        	$this->data['inventario'] = $inventario_finalData;	
+        	$this->data['departamento'] = $depto_data;	
+            $this->render_template('inventario/create', $this->data);
+        }
+    }
 
-		$this->load->library('upload', $config);
-
-		foreach ($files['name'] as $key => $image) {
-			$_FILES['product_image[]']['name']= $files['name'][$key];
-			$_FILES['product_image[]']['type']= $files['type'][$key];
-			$_FILES['product_image[]']['tmp_name']= $files['tmp_name'][$key];
-			$_FILES['product_image[]']['error']= $files['error'][$key];
-			$_FILES['product_image[]']['size']= $files['size'][$key];
-			$type = explode('.', $files['name'][$key]);
-			$type = $type[count($type) - 1];
-			$datos[]=array(
-				'ruta' => $config['upload_path'].'/'.$config['file_name'].'.'.$type,
-			);
-			
-			$this->upload->initialize($config);
-			$this->upload->do_upload('product_image[]');
-		}
-		return $datos;
-	}
 
 	public function delete($id)
 	{
-		if(!in_array('deletePrivada', $this->permission)) {
+		if(!in_array('deleteInforme', $this->permission)) {
 			redirect('dashboard', 'refresh');
 		}
 
 		if($id) {
 			if($this->input->post('confirm')) {
-					$delete = $this->model_privada->delete($id);
+					$delete = $this->model_informes->eliminar($id);
 					if($delete == true) {
 		        		$this->session->set_flashdata('success', 'Eliminado satisfactoriamente');
-		        		redirect('privada/', 'refresh');
+		        		redirect('informes/', 'refresh');
 		        	}
 		        	else {
 		        		$this->session->set_flashdata('error', 'Ocurrió un error!!');
-		        		redirect('privada/delete/'.$id, 'refresh');
+		        		redirect('informes/delete/'.$id, 'refresh');
 		        	}
 
 			}	
 			else {
 				$this->data['id'] = $id;
-				$this->render_template('privada/delete', $this->data);
+				$this->render_template('informes/delete', $this->data);
 			}	
 		}
-	}
-
-	public function detail($id)
-	{
-		$this->data['pictures']=$this->model_privada->img($id);
-		$this->render_template('privada/detail', $this->data);
-	}
-
-	public function edit()
-	{
-		echo "en construcción";
 	}
 }

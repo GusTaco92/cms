@@ -60,6 +60,13 @@
                     </thead>
                     <tbody>
                       <tr>
+                        <td>Inventario</td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="createInventario" class="minimal"></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="updateInventario" class="minimal"></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="viewInventario" class="minimal"></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="deleteInventario" class="minimal"></td>
+                      </tr>
+                      <tr>
                         <td>Admin Privada</td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="createPrivada" class="minimal"></td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="updatePrivada" class="minimal"></td>

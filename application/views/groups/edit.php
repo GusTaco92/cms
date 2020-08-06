@@ -63,6 +63,27 @@
                     </thead>
                     <tbody>
                       <tr>
+                        <td>Inventario</td>
+                        <td><input type="checkbox" class="minimal" name="permission[]" id="permission" class="minimal" value="createInventario" <?php if($serialize_permission) {
+                          if(in_array('createInventario', $serialize_permission)) { echo "checked"; } 
+                        } ?> ></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" class="minimal" value="updateInventario" <?php 
+                        if($serialize_permission) {
+                          if(in_array('updateInventario', $serialize_permission)) { echo "checked"; } 
+                        }
+                        ?>></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" class="minimal" value="viewInventario" <?php 
+                        if($serialize_permission) {
+                          if(in_array('viewInventario', $serialize_permission)) { echo "checked"; }   
+                        }
+                        ?>></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" class="minimal" value="deleteInventario" <?php 
+                        if($serialize_permission) {
+                          if(in_array('deleteInventario', $serialize_permission)) { echo "checked"; }  
+                        }
+                         ?>></td>
+                      </tr>
+                      <tr>
                         <td>Admin Privada</td>
                         <td><input type="checkbox" class="minimal" name="permission[]" id="permission" class="minimal" value="createPrivada" <?php if($serialize_permission) {
                           if(in_array('createPrivada', $serialize_permission)) { echo "checked"; } 

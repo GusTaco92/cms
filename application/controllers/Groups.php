@@ -8,7 +8,7 @@ class Groups extends Admin_Controller
 
 		$this->not_logged_in();
 
-		$this->data['page_title'] = 'Groups';
+		$this->data['page_title'] = 'Grupos';
 		
 
 		$this->load->model('model_groups');

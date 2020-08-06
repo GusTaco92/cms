@@ -12,11 +12,31 @@
         </li>
 
         <?php if($user_permission): ?>
+          <?php if(in_array('createInventario', $user_permission) || in_array('updateInventario', $user_permission) || in_array('viewInventario', $user_permission) || in_array('deleteInventario', $user_permission)): ?>
+            <li class="treeview" id="mainInventarioNav">
+            <a href="#">
+              <i class="fas fa-cubes"></i>
+              <span>Inventario</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <?php if(in_array('createInventario', $user_permission)): ?>
+              <li id="createInventarioNav"><a href="<?php echo base_url('Inventario/create') ?>"><i class="fa fa-circle-o"></i>Registrar</a></li>
+              <?php endif; ?>
+
+              <?php if(in_array('updateInventario', $user_permission) || in_array('viewInventario', $user_permission) || in_array('deleteInventario', $user_permission)): ?>
+              <li id="manageInventarioNav"><a href="<?php echo base_url('Inventario') ?>"><i class="fa fa-circle-o"></i> Administrar</a></li>
+            <?php endif; ?>
+            </ul>
+          </li>
+          <?php endif; ?>
           <?php if(in_array('createPrivada', $user_permission) || in_array('updatePrivada', $user_permission) || in_array('viewPrivada', $user_permission) || in_array('deletePrivada', $user_permission)): ?>
             <li class="treeview" id="mainPrivadaNav">
             <a href="#">
               <i class="far fa-building"></i>
-              <span>*Privada</span>
+              <span>Privada</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -37,7 +57,7 @@
             <li class="treeview" id="mainInformeNav">
             <a href="#">
               <i class="fas fa-info-circle"></i>
-              <span>*Informes Costos</span>
+              <span>Informes Costos</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -58,7 +78,7 @@
             <li class="treeview" id="mainGatilandNav">
             <a href="#">
               <i class="fas fa-cat"></i>
-              <span>*Aportaciones gatiland</span>
+              <span>Aportaciones gatiland</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -78,7 +98,7 @@
             <li class="treeview" id="mainQuejasNav">
             <a href="#">
               <i class="far fa-angry"></i>
-              <span>*Quejas</span>
+              <span>Quejas</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
