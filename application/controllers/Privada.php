@@ -35,7 +35,7 @@ class Privada extends Admin_Controller
             redirect('dashboard', 'refresh');
         }
 
-		if (empty($_FILES['product_image']['name']))
+		if (empty($_FILES['product_image']['name'][0]))
 		{
 			$this->form_validation->set_rules('product_image', 'Imagenes', 'required');
 		}
@@ -68,7 +68,7 @@ class Privada extends Admin_Controller
         		redirect('privada/', 'refresh');
         	}
         	else {
-        		$this->session->set_flashdata('errors', 'Corrió un error, contacta al administrador del sistema!!');
+        		$this->session->set_flashdata('errors', 'Ocurrió un error, contacta al administrador del sistema!!');
         		redirect('privada/create', 'refresh');
         	}
         }
@@ -141,6 +141,9 @@ class Privada extends Admin_Controller
 
 	public function detail($id)
 	{
+		if(!in_array('viewPrivada', $this->permission)) {
+			redirect('dashboard', 'refresh');
+		}
 		$this->data['pictures']=$this->model_privada->img($id);
 		$this->render_template('privada/detail', $this->data);
 	}

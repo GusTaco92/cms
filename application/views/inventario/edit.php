@@ -5,7 +5,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Dar de alta
+      Editar producto del inventario
       <small>Nuevo artículo al inventario</small>
     </h1>
     <ol class="breadcrumb">
@@ -37,20 +37,27 @@
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Registrar nuevo producto</h3>
+            <h3 class="box-title">Actualizar nuevo producto</h3>
           </div>
           <!-- /.box-header -->
-          <form role="form" action="<?php base_url('inventario/create') ?>" method="post" enctype="multipart/form-data">
+          <form role="form" action="<?php base_url('inventario/update') ?>" method="post" enctype="multipart/form-data">
               <div class="box-body">
 
                 <?php echo validation_errors(); ?>
-
                 <div class="form-group">
-
+                <?php
+                  foreach ($imagenes as $ki => $imgs) {
+                ?>
+                  <img src="<?php echo base_url().$imgs->inv_URL; ?>" class="img-fluid" width="250px" height="250px" alt="Imagen <?php echo $ki; ?>">
+                <?php
+                  }
+                ?>
+                </div>
+                <div class="form-group">
                   <label for="product_image">Imagen</label>
                   <div class="kv-avatar">
                       <div class="file-loading">
-                          <input id="product_image" name="product_image[]" type="file"  multiple required>
+                          <input id="product_image" name="product_image[]" type="file"  multiple>
                       </div>
                   </div>
                 </div>
@@ -60,8 +67,14 @@
                   <select class="form-control" id="departamento" name="departamento" required>
                   <?php
                         foreach ($departamento as $key => $dep) {
+                          $seleccionado="";
+                          if($dep->depto_id == $producto[0]->inv_depto_id){
+                            $seleccionado="SELECTED";
+                          }else{
+                            $seleccionado="";
+                          }
                     ?>
-                        <option value="<?php echo $dep->depto_id ?>"><?php echo $dep->depto_nombre."--".$dep->firstname." ".$dep->lastname ?></option>
+                        <option value="<?php echo $dep->depto_id ?>" <?php echo $seleccionado; ?>><?php echo $dep->depto_nombre."--".$dep->firstname." ".$dep->lastname ?></option>
                     <?php
                         }
                       ?>
@@ -70,30 +83,30 @@
 
                 <div class="form-group">
                   <label for="marca">Marca</label>
-                  <input type="text" class="form-control" id="marca" name="marca" placeholder="" value="<?php echo set_value("marca"); ?>" autocomplete="off" />
+                  <input type="text" class="form-control" id="marca" name="marca" placeholder="" value="<?php echo $producto[0]->inv_marca; ?>" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
                   <label for="modelo">Modelo</label>
-                  <input type="text" class="form-control" id="modelo" name="modelo" placeholder="" value="<?php echo set_value("modelo"); ?>" autocomplete="off" />
+                  <input type="text" class="form-control" id="modelo" name="modelo" placeholder="" value="<?php echo $producto[0]->inv_modelo; ?>" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
                   <label for="descripcion">Descripción</label>
-                  <textarea type="text" class="form-control" id="descripcion" name="descripcion" value="<?php echo set_value("descripcion"); ?>" placeholder="Ingresa una descripción" autocomplete="off"></textarea>
+                  <textarea type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingresa una descripción" autocomplete="off"><?php echo $producto[0]->inv_descripcion; ?></textarea>
                 </div>
 
                 <div class="form-group">
                   <label for="barras">Código de barras</label>
-                  <input type="text" class="form-control" id="barras" name="barras" value="<?php echo set_value("barras"); ?>"placeholder="Código de barras" autocomplete="off">
+                  <input type="text" class="form-control" id="barras" name="barras" value="<?php echo $producto[0]->inv_codigoB; ?>" placeholder="Código de barras" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="serie">Número de serie</label>
-                  <input type="text" class="form-control" id="serie" name="serie" value="<?php echo set_value("serie"); ?>"placeholder="Código de barras" autocomplete="off">
+                  <input type="text" class="form-control" id="serie" name="serie" value="<?php echo $producto[0]->inv_serie; ?>" placeholder="Código de barras" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="importe">Importe(sin impuestos)</label>
-                  <input type="text" class="form-control" id="importe" name="importe" value="<?php echo set_value("importe"); ?>"placeholder="Código de barras" autocomplete="off">
+                  <input type="text" class="form-control" id="importe" name="importe" value="<?php echo $producto[0]->inv_importe; ?>" placeholder="Código de barras" autocomplete="off">
                 </div>
 
               </div>
@@ -124,7 +137,7 @@
     $("#description").wysihtml5();
 
     $("#mainInventarioNav").addClass('active');
-    $("#createInventarioNav").addClass('active');
+    $("#manageInventarioNav").addClass('active');
     
     var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + 
         'onclick="alert(\'Call your custom code here.\')">' +
