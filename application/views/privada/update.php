@@ -37,20 +37,27 @@
 
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Agregar orden de servicio</h3>
+            <h3 class="box-title">Editar orden de servicio</h3>
           </div>
           <!-- /.box-header -->
-          <form role="form" action="<?php base_url('privada/create') ?>" method="post" enctype="multipart/form-data">
+          <form role="form" action="<?php base_url('privada/edit') ?>" method="post" enctype="multipart/form-data">
               <div class="box-body">
 
                 <?php echo validation_errors(); ?>
-
                 <div class="form-group">
-
-                  <label for="product_image">Imagen</label>
+                    <?php
+                    foreach ($imagenes as $ki => $imgs) {
+                    ?>
+                    <img src="<?php echo base_url().$imgs->URL; ?>" class="img-fluid" width="80px" height="80px" alt="Imagen <?php echo $ki; ?>">
+                    <?php
+                    }
+                    ?>
+                </div>
+                <div class="form-group">
+                  <label for="product_image">Imagenes finales del proyecto</label>
                   <div class="kv-avatar">
                       <div class="file-loading">
-                          <input id="product_image" name="product_image[]" type="file"  multiple required>
+                          <input id="product_image" name="product_image[]" type="file"  multiple>
                       </div>
                   </div>
                 </div>
@@ -58,50 +65,77 @@
                 <div class="form-group">
                   <label for="tipoV">Tipo de edificio</label>
                   <select class="form-control" id="tipoV" name="tipoV" required>
-                    <option value="">Seleccionar grupos</option>
-                      <option value="Casa">Casa</option>
-                      <option value="Departamento">Departamento</option>
+                        <option value="">Seleccionar grupos</option>
+                    <?php
+                        for ($i=0; $i < 2 ;$i++) {
+                            $seleccionado="";
+                            if($i == 0){
+                                if("Casa"==$orden[0]->CasaDepto){
+                                    $seleccionado="SELECTED";
+                                }else{
+                                    $seleccionado="";
+                                }
+                                ?>
+                                <option value="Casa" <?php echo $seleccionado; ?>>Casa</option>
+                            <?php
+                            }
+                            if($i == 1){
+                                if("Departamento"==$orden[0]->CasaDepto){
+                                    $seleccionado="SELECTED";
+                                }else{
+                                    $seleccionado="";
+                                }
+                                ?>
+                                <option value="Departamento" <?php echo $seleccionado; ?>>Departamento</option>
+                            <?php
+                            }
+                          
+                    ?>
+                        
+                    <?php
+                        }
+                    ?>
                   </select>
                 </div>
 
                 <div class="form-group">
                   <label for="edif">Edificio</label>
-                  <input type="text" class="form-control" id="edif" name="edif" placeholder="# de edificio" autocomplete="off" />
+                  <input type="text" class="form-control" id="edif" name="edif" value="<?php echo $orden[0]->Edificio; ?>" placeholder="# de edificio" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
                   <label for="mat">Materiales</label>
-                  <input type="text" class="form-control" id="mat" name="mat" placeholder="Ingresa los materiales" autocomplete="off" />
+                  <input type="text" class="form-control" id="mat" name="mat" value="<?php echo $orden[0]->Materiales; ?>" placeholder="Ingresa los materiales" autocomplete="off" />
                 </div>
 
                 <div class="form-group">
                   <label for="cot">Cotización</label>
-                  <input type="text" class="form-control" id="cot" name="cot" placeholder="Ingresa el folio de la cotización" autocomplete="off">
+                  <input type="text" class="form-control" id="cot" name="cot" value="<?php echo $orden[0]->Cotización; ?>" placeholder="Ingresa el folio de la cotización" autocomplete="off">
                 </div>
 
                 <div class="form-group">
                   <label for="fact">Factura</label>
-                  <input type="text" class="form-control" id="fact" name="fact" placeholder="Ingresa el folio de la factura" autocomplete="off">
+                  <input type="text" class="form-control" id="fact" name="fact" value="<?php echo $orden[0]->Factura; ?>" placeholder="Ingresa el folio de la factura" autocomplete="off">
                 </div>
 
                 <div class="form-group">
                   <label for="total">Total de factura</label>
-                  <input type="text" class="form-control" id="total" name="total" placeholder="Ingresa el total de la factura" autocomplete="off">
+                  <input type="text" class="form-control" id="total" name="total" value="<?php echo $orden[0]->Total_f; ?>" placeholder="Ingresa el total de la factura" autocomplete="off">
                 </div>
 
                 <div class="form-group">
                   <label for="encargado">Encargado</label>
-                  <input type="text" class="form-control" id="encargado" name="encargado" placeholder="Nombre del encargado" autocomplete="off" required>
+                  <input type="text" class="form-control" id="encargado" name="encargado" value="<?php echo $orden[0]->Encargado; ?>" placeholder="Nombre del encargado" autocomplete="off">
                 </div>
 
                 <div class="form-group">
                   <label for="f_ini">Fecha de inicio</label>
-                  <input type="date" class="form-control" id="f_ini" name="f_ini">
+                  <input type="date" class="form-control" id="f_ini" name="f_ini" value="<?php echo $orden[0]->Fecha_de_inicio; ?>">
                 </div>
 
                 <div class="form-group">
                   <label for="f_fin">Fecha de fin</label>
-                  <input type="date" class="form-control" id="f_fin" name="f_fin">
+                  <input type="date" class="form-control" id="f_fin" name="f_fin" value="<?php echo $orden[0]->Fecha_de_termino; ?>">
                 </div>
 
               </div>

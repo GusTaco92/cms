@@ -50,13 +50,15 @@
                     <th>#</th>
                     <th>Casa/Dto</th>
                     <th>Edificio</th>
+                    <th>Encargado</th>
                     <th>Materiales</th>
                     <th>Factura</th>
                     <th>Total de fac</th>
                     <th>Cotización</th>
                     <th>Fecha de inicio</th>
                     <th>Fecha de termino</th>
-                    <th>Evidencias</th>
+                    <th>Fotos antes</th>
+                    <th>Fotos despues</th>
 
                   <?php if(in_array('updatePrivada', $user_permission) || in_array('deletePrivada', $user_permission)): ?>
                   <th>Acción</th>
@@ -68,8 +70,9 @@
                     <?php foreach ($privada_data as $k => $v): ?>
                       <tr>
                         <td><?php echo $v['ordenes_info']['id']; ?></td>
-                        <td><?php echo $v['ordenes_info']['Casa/Dto']; ?></td>
+                        <td><?php echo $v['ordenes_info']['CasaDepto']; ?></td>
                         <td><?php echo $v['ordenes_info']['Edificio']; ?></td>
+                        <td><?php echo $v['ordenes_info']['Encargado']; ?></td>
                         <td><?php echo $v['ordenes_info']['Materiales']; ?></td>
                         <td><?php echo $v['ordenes_info']['Factura']; ?></td>
                         <td><?php echo "$".number_format($v['ordenes_info']['Total_f'], 2, '.', ' '); ?></td>
@@ -78,6 +81,9 @@
                         <td><?php echo $v['ordenes_info']['Fecha_de_termino']; ?></td>
                         <td>
                           <a href="<?php echo base_url('Privada/detail/'.$v['ordenes_info']['id']) ?>"><i class="fas fa-eye"></i></a>
+                        </td>
+                        <td>
+                          <a href="<?php echo base_url('Privada/detalle/'.$v['ordenes_info']['id']) ?>"><i class="fas fa-eye"></i></a>
                         </td>
                         <?php if(in_array('updatePrivada', $user_permission) || in_array('deletePrivada', $user_permission)): ?>
                         <td>

@@ -54,10 +54,10 @@
                 ?>
                 </div>
                 <div class="form-group">
-                  <label for="product_image">Imagen</label>
+                  <label for="product_image">Imagenes iniciales del proyecto</label>
                   <div class="kv-avatar">
                       <div class="file-loading">
-                          <input id="product_image" name="product_image[]" type="file"  multiple>
+                          <input id="product_image" name="product_image[]" type="file" multiple>
                       </div>
                   </div>
                 </div>

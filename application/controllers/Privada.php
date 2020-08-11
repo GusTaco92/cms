@@ -41,12 +41,13 @@ class Privada extends Admin_Controller
 		}
 		$this->form_validation->set_rules('tipoV', 'Tipo de vivienda', 'required');
 		$this->form_validation->set_rules('edif', 'Edificio', 'trim|required');
-		$this->form_validation->set_rules('mat', 'Materiales', 'trim|required');
+		$this->form_validation->set_rules('mat', 'Materiales', 'trim|required|max_length[2000]');
+		$this->form_validation->set_rules('encargado', 'Encargado', 'trim|required|max_length[24]');
 		$this->form_validation->set_rules('fact', 'Factura', 'trim');
         $this->form_validation->set_rules('cot', 'Cotización', 'trim|required');
         $this->form_validation->set_rules('f_ini', 'Fecha de inicio', 'trim|required');
-        $this->form_validation->set_rules('f_fin', 'Fecha de fin', 'trim|required');
-        $this->form_validation->set_rules('total', 'Total de factura', 'trim|required|numeric');
+        $this->form_validation->set_rules('f_fin', 'Fecha de fin', 'trim');
+        $this->form_validation->set_rules('total', 'Total de factura', 'trim|numeric');
 		
 	
         if ($this->form_validation->run() == TRUE) {
@@ -54,7 +55,7 @@ class Privada extends Admin_Controller
         	$upload_image = $this->upload_image($_FILES['product_image']);
 
         	$data = array(
-        		'Casa/Dto' => $this->input->post('tipoV'),
+        		'CasaDepto' => $this->input->post('tipoV'),
         		'Edificio' => $this->input->post('edif'),
         		'Materiales' => $this->input->post('mat'),
         		'Factura' => $this->input->post('fact'),
@@ -62,6 +63,7 @@ class Privada extends Admin_Controller
                 'Fecha_de_inicio' => $this->input->post('f_ini'),
                 'Fecha_de_termino' => $this->input->post('f_fin'),
                 'Total_f' => $this->input->post('total'),
+                'Encargado' => $this->input->post('encargado'),
         	);
 			
         	$create = $this->model_privada->create($data,$upload_image);
@@ -91,10 +93,8 @@ class Privada extends Admin_Controller
 		$config = array(
 			'upload_path'   => 'assets/images/evidencias',
 			'allowed_types' => 'jpg|gif|png',
-			'file_name'     => uniqid(),                
 			'max_size'     => '1000',                
 		);
-
 		$this->load->library('upload', $config);
 
 		foreach ($files['name'] as $key => $image) {
@@ -103,10 +103,8 @@ class Privada extends Admin_Controller
 			$_FILES['product_image[]']['tmp_name']= $files['tmp_name'][$key];
 			$_FILES['product_image[]']['error']= $files['error'][$key];
 			$_FILES['product_image[]']['size']= $files['size'][$key];
-			$type = explode('.', $files['name'][$key]);
-			$type = $type[count($type) - 1];
 			$datos[]=array(
-				'ruta' => $config['upload_path'].'/'.$config['file_name'].'.'.$type,
+				'ruta' => $config['upload_path'].'/'.$files['name'][$key],
 			);
 			
 			$this->upload->initialize($config);
@@ -123,17 +121,20 @@ class Privada extends Admin_Controller
 
 		if($id) {
 			if($this->input->post('confirm')) {
-					$delete = $this->model_privada->delete($id);
-					if($delete == true) {
-		        		$this->session->set_flashdata('success', 'Eliminado satisfactoriamente');
-		        		redirect('privada/', 'refresh');
-		        	}
-		        	else {
-		        		$this->session->set_flashdata('error', 'Ocurrió un error!!');
-		        		redirect('privada/delete/'.$id, 'refresh');
-		        	}
-
-			}	
+				$img_data= $this->model_privada->imgDelete($id);
+				foreach ($img_data as $key => $value) {
+					unlink($value["URL"]);
+				}
+				$delete = $this->model_privada->delete($id);
+				if($delete == true) {
+					$this->session->set_flashdata('success', 'Eliminado satisfactoriamente');
+					redirect('privada/', 'refresh');
+				}
+				else {
+					$this->session->set_flashdata('error', 'Ocurrió un error!!');
+					redirect('privada/delete/'.$id, 'refresh');
+				}
+			}
 			else {
 				$this->data['id'] = $id;
 				$this->render_template('privada/delete', $this->data);
@@ -150,8 +151,68 @@ class Privada extends Admin_Controller
 		$this->render_template('privada/detail', $this->data);
 	}
 
-	public function edit()
+	public function detalle($id)
 	{
-		echo "en construcción";
+		if(!in_array('viewPrivada', $this->permission)) {
+			redirect('dashboard', 'refresh');
+		}
+		$this->data['pictures']=$this->model_privada->imgafter($id);
+		$this->render_template('privada/detail', $this->data);
+	}
+
+	public function edit($id)
+	{
+		if(!in_array('updatePrivada', $this->permission)) {
+            redirect('dashboard', 'refresh');
+        }
+
+		$this->form_validation->set_rules('tipoV', 'Tipo de vivienda', 'required');
+		$this->form_validation->set_rules('edif', 'Edificio', 'trim|required');
+		$this->form_validation->set_rules('mat', 'Materiales', 'trim|required|max_length[2000]');
+		$this->form_validation->set_rules('encargado', 'Encargado', 'trim|required|max_length[24]');
+		$this->form_validation->set_rules('fact', 'Factura', 'trim');
+        $this->form_validation->set_rules('cot', 'Cotización', 'trim|required');
+        $this->form_validation->set_rules('f_ini', 'Fecha de inicio', 'trim|required');
+        $this->form_validation->set_rules('f_fin', 'Fecha de fin', 'trim');
+        $this->form_validation->set_rules('total', 'Total de factura', 'trim|numeric');
+		
+	
+        if ($this->form_validation->run() == TRUE) {
+            // true case
+        	if (!empty($_FILES['product_image']['name'][0]))
+			{
+				$upload_image = $this->upload_image($_FILES['product_image']);
+			}else{
+				$upload_image="";
+			}
+
+        	$data = array(
+        		'CasaDepto' => $this->input->post('tipoV'),
+        		'Edificio' => $this->input->post('edif'),
+        		'Materiales' => $this->input->post('mat'),
+        		'Factura' => $this->input->post('fact'),
+                'Cotización' => $this->input->post('cot'),
+                'Fecha_de_inicio' => $this->input->post('f_ini'),
+                'Fecha_de_termino' => $this->input->post('f_fin'),
+                'Total_f' => $this->input->post('total'),
+                'Encargado' => $this->input->post('encargado'),
+        	);
+			
+        	$create = $this->model_privada->update($id,$data,$upload_image);
+        	if($create == true) {
+        		$this->session->set_flashdata('success', 'Orden actualizada correctamente');
+        		redirect('privada/', 'refresh');
+        	}
+        	else {
+        		$this->session->set_flashdata('errors', 'Ocurrió un error, contacta al administrador del sistema!!');
+        		redirect('privada/edit', 'refresh');
+        	}
+        }else {
+			$inventario_data= $this->model_privada->getDataOrdenUpdate($id);
+			$img_data= $this->model_privada->getImgProd($id);
+        	$this->data['orden'] = $inventario_data;
+        	$this->data['imagenes'] = $img_data;
+            $this->render_template('privada/update', $this->data);
+        }
 	}
 }
