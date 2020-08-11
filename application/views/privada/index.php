@@ -52,6 +52,7 @@
                     <th>Edificio</th>
                     <th>Materiales</th>
                     <th>Factura</th>
+                    <th>Total de fac</th>
                     <th>Cotización</th>
                     <th>Fecha de inicio</th>
                     <th>Fecha de termino</th>
@@ -71,6 +72,7 @@
                         <td><?php echo $v['ordenes_info']['Edificio']; ?></td>
                         <td><?php echo $v['ordenes_info']['Materiales']; ?></td>
                         <td><?php echo $v['ordenes_info']['Factura']; ?></td>
+                        <td><?php echo "$".number_format($v['ordenes_info']['Total_f'], 2, '.', ' '); ?></td>
                         <td><?php echo $v['ordenes_info']['Cotización']; ?></td>
                         <td><?php echo $v['ordenes_info']['Fecha_de_inicio']; ?></td>
                         <td><?php echo $v['ordenes_info']['Fecha_de_termino']; ?></td>

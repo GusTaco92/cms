@@ -75,13 +75,18 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="fact">Factura</label>
-                  <textarea type="text" class="form-control" id="fact" name="fact" placeholder="Ingresa el folio de la factura" autocomplete="off"></textarea>
+                  <label for="cot">Cotización</label>
+                  <input type="text" class="form-control" id="cot" name="cot" placeholder="Ingresa el folio de la cotización" autocomplete="off">
                 </div>
 
                 <div class="form-group">
-                  <label for="cot">Cotización</label>
-                  <textarea type="text" class="form-control" id="cot" name="cot" placeholder="Ingresa el folio de la cotización" autocomplete="off"></textarea>
+                  <label for="fact">Factura</label>
+                  <input type="text" class="form-control" id="fact" name="fact" placeholder="Ingresa el folio de la factura" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                  <label for="total">Total de factura</label>
+                  <input type="text" class="form-control" id="total" name="total" placeholder="Ingresa el total de la factura" autocomplete="off">
                 </div>
 
                 <div class="form-group">

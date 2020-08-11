@@ -46,6 +46,7 @@ class Privada extends Admin_Controller
         $this->form_validation->set_rules('cot', 'Cotización', 'trim|required');
         $this->form_validation->set_rules('f_ini', 'Fecha de inicio', 'trim|required');
         $this->form_validation->set_rules('f_fin', 'Fecha de fin', 'trim|required');
+        $this->form_validation->set_rules('total', 'Total de factura', 'trim|required|numeric');
 		
 	
         if ($this->form_validation->run() == TRUE) {
@@ -59,7 +60,8 @@ class Privada extends Admin_Controller
         		'Factura' => $this->input->post('fact'),
                 'Cotización' => $this->input->post('cot'),
                 'Fecha_de_inicio' => $this->input->post('f_ini'),
-                'Fecha_de_termino' => $this->input->post('f_fin'),                
+                'Fecha_de_termino' => $this->input->post('f_fin'),
+                'Total_f' => $this->input->post('total'),
         	);
 			
         	$create = $this->model_privada->create($data,$upload_image);
