@@ -58,6 +58,7 @@
                 <div class="form-group">
                   <label for="departamento">Departamento</label>
                   <select class="form-control" id="departamento" name="departamento" required>
+                    <option value="">Selecciona una opción</option>
                   <?php
                         foreach ($departamento as $key => $dep) {
                     ?>
@@ -84,8 +85,13 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="barras">Código de barras</label>
-                  <input type="text" class="form-control" id="barras" name="barras" value="<?php echo set_value("barras"); ?>"placeholder="Código de barras" autocomplete="off">
+                  <label for="barras">Tipo propiedad</label>
+                  <select class="form-control" id="barras" name="barras" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Producto">Producto</option>
+                    <option value="Intelectual">Intelectual</option>
+                  </select>
+                  <!-- <input type="text" class="form-control" id="barras" name="barras" value="<?php echo set_value("barras"); ?>"placeholder="Código de barras" autocomplete="off"> -->
                 </div>
                 <div class="form-group">
                   <label for="serie">Número de serie</label>

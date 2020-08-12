@@ -152,6 +152,8 @@ class Inventario extends Admin_Controller
         $this->form_validation->set_rules('barras', 'Código de barras', 'trim|max_length[25]');
         $this->form_validation->set_rules('serie', 'Número de serie', 'trim|max_length[25]');
         $this->form_validation->set_rules('importe', 'Importe', 'trim|required|numeric');
+        $this->form_validation->set_rules('responsable', 'Responsable', 'trim');
+        $this->form_validation->set_rules('f_asignacion', 'Fecha asignación', 'trim');
 		
 	
         if ($this->form_validation->run() == TRUE) {
@@ -170,7 +172,9 @@ class Inventario extends Admin_Controller
         		'inv_descripcion' => $this->input->post('descripcion'),
                 'inv_codigoB' => $this->input->post('barras'),
                 'inv_serie' => $this->input->post('serie'),
-                'inv_importe' => $this->input->post('importe'),                
+                'inv_importe' => $this->input->post('importe'),
+                'inv_fechaAsignacion' => $this->input->post('f_asignacion'),
+                'inv_responsable' => $this->input->post('responsable'),
         	);
         	$create = $this->model_inventario->update($id,$data,$upload_image);
         	if($create == true) {
@@ -185,9 +189,11 @@ class Inventario extends Admin_Controller
 			$depto_data = $this->model_inventario->getDepto();
 			$inventario_data= $this->model_inventario->getDataProd($id);
 			$img_data= $this->model_inventario->getImgProd($id);
+			$responsable= $this->model_inventario->getUsuarios();
         	$this->data['departamento'] = $depto_data;
         	$this->data['producto'] = $inventario_data;
         	$this->data['imagenes'] = $img_data;
+        	$this->data['responsable'] = $responsable;
             $this->render_template('inventario/edit', $this->data);
         }
 	}

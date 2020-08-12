@@ -65,7 +65,7 @@
                 <div class="form-group">
                   <label for="tipoV">Tipo de edificio</label>
                   <select class="form-control" id="tipoV" name="tipoV" required>
-                        <option value="">Seleccionar grupos</option>
+                        <option value="">Selecciona una opción</option>
                     <?php
                         for ($i=0; $i < 2 ;$i++) {
                             $seleccionado="";

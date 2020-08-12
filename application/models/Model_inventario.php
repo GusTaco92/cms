@@ -12,7 +12,16 @@ class Model_inventario extends CI_Model
         $this->db->select('*');
         $this->db->from('inventario');
         $this->db->join('departamento', 'departamento.depto_id = inventario.inv_depto_id');
-        // $this->db->join('inventario_evidencia', 'inventario_evidencia.id_inv = inventario.inv_id');
+        $this->db->join('users', 'users.id = inventario.inv_responsable');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getUsuarios()
+    { 
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->order_by('username', 'ASC');
         $query = $this->db->get();
         return $query->result();
     }

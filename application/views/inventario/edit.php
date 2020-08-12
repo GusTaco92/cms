@@ -97,13 +97,65 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="barras">Código de barras</label>
-                  <input type="text" class="form-control" id="barras" name="barras" value="<?php echo $producto[0]->inv_codigoB; ?>" placeholder="Código de barras" autocomplete="off">
+                <label for="barras">Tipo propiedad</label>
+                  <select class="form-control" id="barras" name="barras" required>
+                    <option value="">Selecciona una opción</option>
+                      <?php
+                          for ($i=0; $i < 2 ;$i++) {
+                              $seleccionado="";
+                              if($i == 0){
+                                  if("Producto"==$producto[0]->inv_codigoB){
+                                      $seleccionado="SELECTED";
+                                  }else{
+                                      $seleccionado="";
+                                  }
+                                  ?>
+                                  <option value="Producto" <?php echo $seleccionado; ?>>Producto</option>
+                              <?php
+                              }
+                              if($i == 1){
+                                  if("Intelectual"==$producto[0]->inv_codigoB){
+                                      $seleccionado="SELECTED";
+                                  }else{
+                                      $seleccionado="";
+                                  }
+                                  ?>
+                                  <option value="Intelectual" <?php echo $seleccionado; ?>>Intelectual</option>
+                              <?php
+                              }
+                          }
+                      ?>
+                    </select>
                 </div>
                 <div class="form-group">
                   <label for="serie">Número de serie</label>
                   <input type="text" class="form-control" id="serie" name="serie" value="<?php echo $producto[0]->inv_serie; ?>" placeholder="Código de barras" autocomplete="off">
                 </div>
+
+                <div class="form-group">
+                  <label for="f_asignacion">Fecha de asignación</label>
+                  <input type="date" class="form-control" id="f_asignacion" name="f_asignacion" value="<?php echo $producto[0]->inv_fechaAsignacion; ?>" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                  <label for="responsable">Responsable</label>
+                  <select class="form-control" id="responsable" name="responsable" required>
+                  <?php
+                        foreach ($responsable as $key => $dep) {
+                          $seleccionado="";
+                          if($dep->id == $producto[0]->inv_responsable){
+                            $seleccionado="SELECTED";
+                          }else{
+                            $seleccionado="";
+                          }
+                    ?>
+                        <option value="<?php echo $dep->id ?>" <?php echo $seleccionado; ?>><?php echo $dep->firstname." ".$dep->lastname ?></option>
+                    <?php
+                        }
+                      ?>
+                  </select>
+                </div>
+
                 <div class="form-group">
                   <label for="importe">Importe(sin impuestos)</label>
                   <input type="text" class="form-control" id="importe" name="importe" value="<?php echo $producto[0]->inv_importe; ?>" placeholder="Código de barras" autocomplete="off">

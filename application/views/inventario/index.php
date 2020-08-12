@@ -52,7 +52,7 @@
                     <th>Marca</th>
                     <th>Descripción</th>
                     <th>Modelo</th>
-                    <th>Código Barras</th>
+                    <th>Propiedad</th>
                     <th>Serie</th>
                     <th>Importe</th>
                     <th>Fecha alta</th>
@@ -81,7 +81,7 @@
                         <td><?php echo $v->inv_fechaAlta ?></td>
                         <td><?php echo $v->inv_fechaAsignacion ?></td>
                         <td><?php echo $v->inv_fechaBaja ?></td>
-                        <td><?php echo $v->inv_responsable ?></td>
+                        <td><?php echo $v->username." ".$v->lastname ?></td>
                         <td><?php echo $v->inv_motivoBaja ?></td>
 
                         <?php if(in_array('updateInventario', $user_permission) || in_array('deleteInventario', $user_permission)): ?>
