@@ -52,6 +52,10 @@
                   <td><?php echo $user_data['phone']; ?></td>
                 </tr>
                 <tr>
+                  <th>Sección</th>
+                  <td><?php echo $user_data['seccion'] ?></td>
+                </tr>
+                <tr>
                   <th>Grupo</th>
                   <td><span class="label label-info"><?php echo $user_group['group_name']; ?></span></td>
                 </tr>

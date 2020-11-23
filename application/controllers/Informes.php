@@ -21,9 +21,7 @@ class Informes extends Admin_Controller
 		if(!in_array('viewInforme', $this->permission)) {
 			redirect('dashboard', 'refresh');
 		}
-
 		$informe_data = $this->model_informes->getDataInformesActivos();
-
 		$result = array();
 		foreach ($informe_data as $k => $v) {
 			$result[$k]['user_info'] = $v;

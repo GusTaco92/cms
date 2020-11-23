@@ -92,7 +92,8 @@ class Auth extends Admin_Controller
 							'username'  => $login['username'],
 							'email'     => $login['email'],
 							'profile_picture'=> $login['profile_picture'],
-							'logged_in' => TRUE
+							'logged_in' => TRUE,
+							'seccion' => $login['seccion']
 						);
 
 						$this->session->set_userdata($logged_in_sess);
@@ -159,7 +160,7 @@ class Auth extends Admin_Controller
 					'lastname'  => $data['family_name'],
 					'email' => $data['email'],
 					'profile_picture'=> $data['picture'],
-					'update' => $current_datetime
+					'update' => $current_datetime,
 					);
 
 					$this->google_login_model->Update_user_data($user_data, $data['id']);

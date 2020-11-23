@@ -40,7 +40,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Administrar informes</h3>
+              <h3 class="box-title">Administrar informes <?php echo $this->session->userdata('seccion') ?></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -69,6 +69,7 @@
                   <?php if($informe_data): ?>                  
                     <?php foreach ($informe_data as $k => $v): 
                       $img=explode("/",$v['user_info']['ruta_img']);
+                      $pdf=explode(".",end($img));
                       ?>
                       <tr>
                         <td><?php echo $v['user_info']['id']; ?></td>
@@ -78,7 +79,16 @@
                         <td><?php echo $v['user_info']['email']; ?></td>
                         <td><?php echo $v['user_info']['nivelE']; ?></td>
                         <td><?php echo $v['user_info']['fecha_adicion']; ?></td>
-                        <td><a href="http://colegiomexicodelsureste.edu.mx/publico/images/R_costos/<?php echo end($img) ?>" target="_blank"><img src="http://colegiomexicodelsureste.edu.mx/publico/images/R_costos/<?php echo end($img) ?>" width="150" height="150" class="img-circle"></a></td>
+                        <?php
+                            if(strtolower(end($pdf)) == "pdf"){ ?>
+                              <td><a href="https://play-lh.googleusercontent.com/u9ofV9e2diX3giScuXT46B4A0vxFw8tj5NzHQJVAqAKwL5b_o8CHnO-qiZZIZYHlTg" target="_blank"><img src="https://play-lh.googleusercontent.com/u9ofV9e2diX3giScuXT46B4A0vxFw8tj5NzHQJVAqAKwL5b_o8CHnO-qiZZIZYHlTg" width="150" height="150" class="img-circle"></a></td>
+                        <?php
+                            }else{ ?>
+                              <td><a href="http://colegiomexicodelsureste.edu.mx/publico/images/R_costos/<?php echo end($img) ?>" target="_blank"><img src="http://colegiomexicodelsureste.edu.mx/publico/images/R_costos/<?php echo end($img) ?>" width="150" height="150" class="img-circle"></a></td>
+                        <?php
+                            }
+                            
+                        ?>
                         <td><?php echo $v['user_info']['razon']; ?></td>
                         <td><?php echo $v['user_info']['donde_supo']; ?></td>
                         <td><?php echo $v['user_info']['proviene']; ?></td>

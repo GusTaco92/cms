@@ -10,9 +10,25 @@ class Model_informes extends CI_Model
 	// get the active atttributes data 
 	public function getDataInformesActivos()
 	{
-		$sql = "SELECT * FROM colmex_registrocostos";
-		$query = $this->db_b->query($sql, array(1));
-		return $query->result_array();
+		// $sql = "SELECT * FROM colmex_registrocostos where LIKE %?%";
+		// $query = $this->db_b->query($sql, array($this->session->userdata('seccion')));
+		// return $query->result_array();
+
+		$this->db_b->select('*');
+		$this->db_b->from('colmex_registrocostos');
+		if(!empty($this->session->userdata('seccion'))){
+			$contador= explode(",",$this->session->userdata('seccion'));
+			foreach ($contador as $key => $secciones) {
+				if($key == 0){
+					$this->db_b->like('nivelE', trim($secciones));
+				}else{
+					$this->db_b->or_like('nivelE', trim($secciones));
+				}
+			}
+		}
+		$this->db_b->order_by('id', 'DESC');
+        $query = $this->db_b->get();
+        return $query->result_array();
 	}
 
     public function Interesado($id)
