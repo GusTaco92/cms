@@ -81,6 +81,13 @@
                         <td><input type="checkbox" name="permission[]" id="permission" value="deleteInforme" class="minimal"></td>
                       </tr>
                       <tr>
+                        <td>Informes costos cucm</td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="createInformeCucm" class="minimal"></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="updateInformeCucm" class="minimal"></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="viewInformeCucm" class="minimal"></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" value="deleteInformeCucm" class="minimal"></td>
+                      </tr>
+                      <tr>
                         <td>Gatiland</td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="createGatiland" class="minimal"></td>
                         <td><input type="checkbox" name="permission[]" id="permission" value="updateGatiland" class="minimal"></td>

@@ -72,7 +72,28 @@
             <?php endif; ?>
             </ul>
           </li>
-          <?php endif; ?>     
+          <?php endif; ?>
+
+          <?php if(in_array('createInformeCucm', $user_permission) || in_array('updateInformeCucm', $user_permission) || in_array('viewInformeCucm', $user_permission) || in_array('deleteInformeCucm', $user_permission)): ?>
+            <li class="treeview" id="mainInformeNavCucm">
+            <a href="#">
+              <i class="fas fa-info-circle"></i>
+              <span>Informes CUCM</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <?php if(in_array('createInformeCucm', $user_permission)): ?>
+              <li id="createInformeNavCucm"><a href="<?php echo base_url('informesCucm/create') ?>"><i class="fa fa-circle-o"></i> Registrar informe cucm</a></li>
+              <?php endif; ?>
+
+              <?php if(in_array('updateInformeCucm', $user_permission) || in_array('viewInformeCucm', $user_permission) || in_array('deleteInformeCucm', $user_permission)): ?>
+              <li id="manageInformeNavCucm"><a href="<?php echo base_url('informesCucm') ?>"><i class="fa fa-circle-o"></i> Administrar informes cucm</a></li>
+            <?php endif; ?>
+            </ul>
+          </li>
+          <?php endif; ?>
 
           <?php if(in_array('createGatiland', $user_permission) || in_array('updateGatiland', $user_permission) || in_array('viewGatiland', $user_permission) || in_array('deleteGatiland', $user_permission)): ?>
             <li class="treeview" id="mainGatilandNav">

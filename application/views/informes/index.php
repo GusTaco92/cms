@@ -1,4 +1,4 @@
-
+﻿
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -81,7 +81,7 @@
                         <td><?php echo $v['user_info']['fecha_adicion']; ?></td>
                         <?php
                             if(strtolower(end($pdf)) == "pdf"){ ?>
-                              <td><a href="https://play-lh.googleusercontent.com/u9ofV9e2diX3giScuXT46B4A0vxFw8tj5NzHQJVAqAKwL5b_o8CHnO-qiZZIZYHlTg" target="_blank"><img src="https://play-lh.googleusercontent.com/u9ofV9e2diX3giScuXT46B4A0vxFw8tj5NzHQJVAqAKwL5b_o8CHnO-qiZZIZYHlTg" width="150" height="150" class="img-circle"></a></td>
+                              <td><a href="http://colegiomexicodelsureste.edu.mx/publico/images/R_costos/<?php echo end($img) ?>" target="_blank"><img src="https://play-lh.googleusercontent.com/u9ofV9e2diX3giScuXT46B4A0vxFw8tj5NzHQJVAqAKwL5b_o8CHnO-qiZZIZYHlTg" width="150" height="150" class="img-circle"></a></td>
                         <?php
                             }else{ ?>
                               <td><a href="http://colegiomexicodelsureste.edu.mx/publico/images/R_costos/<?php echo end($img) ?>" target="_blank"><img src="http://colegiomexicodelsureste.edu.mx/publico/images/R_costos/<?php echo end($img) ?>" width="150" height="150" class="img-circle"></a></td>

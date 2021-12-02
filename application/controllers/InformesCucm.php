@@ -1,38 +1,35 @@
 <?php 
 
-class Informes extends Admin_Controller 
+class InformesCucm extends Admin_Controller 
 {
 	public function __construct()
 	{
 		parent::__construct();
-
 		$this->not_logged_in();
-		
-		$this->data['page_title'] = 'Informes';
-		$this->db_b = $this->load->database('segunda', true);
-
+		$this->data['page_title'] = 'Informes CUCM';
+		$this->db_bd = $this->load->database('tercero', true);
 		// $this->load->model('model_users');
-		$this->load->model('model_informes');
+		$this->load->model('model_informesCucm');
 	}
 
 	
 	public function index()
 	{
-		if(!in_array('viewInforme', $this->permission)) {
+		if(!in_array('viewInformeCucm', $this->permission)) {
 			redirect('dashboard', 'refresh');
 		}
-		$informe_data = $this->model_informes->getDataInformesActivos();
+		$informe_data = $this->model_informesCucm->getDataInformesActivos();
 		$result = array();
 		foreach ($informe_data as $k => $v) {
 			$result[$k]['user_info'] = $v;
 		}
 		$this->data['informe_data'] = $result;
-		$this->render_template('informes/index', $this->data);
+		$this->render_template('informesCucm/index', $this->data);
 	}
 
     public function EnviarCostos($id)
 	{
-		$datos=$this->model_informes->Interesado($id)->result();
+		$datos=$this->model_informesCucm->Interesado($id)->result();
 		$niveles = explode(",", $datos[0]->nivelE);
 		
 		$this->load->library('email');
@@ -794,36 +791,36 @@ EOD;
 			);
 		if($this->email->send())
 		{
-			$this->model_informes->ActualizarEstatus($id);
-			echo "Correo enviado correctamente <a href='".base_url('informes/index')."'>Regresar a la página anterior</a>";
+			$this->model_informesCucm->ActualizarEstatus($id);
+			echo "Correo enviado correctamente <a href='".base_url('informesCucm/index')."'>Regresar a la página anterior</a>";
 		}else{
             echo "Error al enviar";
-			echo "Correo enviado correctamente <a href='".base_url('informes/index')."'>Regresar a la página anterior</a>";            
+			echo "Correo enviado correctamente <a href='".base_url('informesCucm/index')."'>Regresar a la página anterior</a>";            
 		}
 	}
 
 	public function delete($id)
 	{
-		if(!in_array('deleteInforme', $this->permission)) {
+		if(!in_array('deleteInformeCucm', $this->permission)) {
 			redirect('dashboard', 'refresh');
 		}
 
 		if($id) {
 			if($this->input->post('confirm')) {
-					$delete = $this->model_informes->eliminar($id);
+					$delete = $this->model_informesCucm->eliminar($id);
 					if($delete == true) {
 		        		$this->session->set_flashdata('success', 'Eliminado satisfactoriamente');
-		        		redirect('informes/', 'refresh');
+		        		redirect('informesCucm/', 'refresh');
 		        	}
 		        	else {
 		        		$this->session->set_flashdata('error', 'Ocurrió un error!!');
-		        		redirect('informes/delete/'.$id, 'refresh');
+		        		redirect('informesCucm/delete/'.$id, 'refresh');
 		        	}
 
 			}	
 			else {
 				$this->data['id'] = $id;
-				$this->render_template('informes/delete', $this->data);
+				$this->render_template('informesCucm/delete', $this->data);
 			}	
 		}
 	}

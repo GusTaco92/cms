@@ -126,6 +126,27 @@
                          ?>></td>
                       </tr>
                       <tr>
+                        <td>Informes costos cucm</td>
+                        <td><input type="checkbox" class="minimal" name="permission[]" id="permission" class="minimal" value="createInformeCucm" <?php if($serialize_permission) {
+                          if(in_array('createInformeCucm', $serialize_permission)) { echo "checked"; } 
+                        } ?> ></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" class="minimal" value="updateInformeCucm" <?php 
+                        if($serialize_permission) {
+                          if(in_array('updateInformeCucm', $serialize_permission)) { echo "checked"; } 
+                        }
+                        ?>></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" class="minimal" value="viewInformeCucm" <?php 
+                        if($serialize_permission) {
+                          if(in_array('viewInformeCucm', $serialize_permission)) { echo "checked"; }   
+                        }
+                        ?>></td>
+                        <td><input type="checkbox" name="permission[]" id="permission" class="minimal" value="deleteInformeCucm" <?php 
+                        if($serialize_permission) {
+                          if(in_array('deleteInformeCucm', $serialize_permission)) { echo "checked"; }  
+                        }
+                         ?>></td>
+                      </tr>
+                      <tr>
                         <td>Gatiland</td>
                         <td><input type="checkbox" class="minimal" name="permission[]" id="permission" class="minimal" value="createGatiland" <?php if($serialize_permission) {
                           if(in_array('createGatiland', $serialize_permission)) { echo "checked"; } 
@@ -147,7 +168,7 @@
                          ?>></td>
                       </tr>
                       <tr>
-                        <td>Gatiland</td>
+                        <td>Quejas</td>
                         <td><input type="checkbox" class="minimal" name="permission[]" id="permission" class="minimal" value="createQuejas" <?php if($serialize_permission) {
                           if(in_array('createQuejas', $serialize_permission)) { echo "checked"; } 
                         } ?> ></td>
